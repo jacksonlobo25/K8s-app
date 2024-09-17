@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: frontend-config
 data:
-  REACT_APP_BACKEND_URL: "http://backend-service:8080/api"  # Replace with your backend service URL
+  REACT_APP_BACKEND_URL: "http://backend-service:8080"  # Replace with your backend service URL
