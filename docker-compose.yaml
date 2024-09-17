@@ -3,17 +3,17 @@ services:
   frontend-service:
     build:
       context: ./frontend
-      # args:
-      #   - REACT_APP_BACKEND_URL=http://backend-service:8080
+      args:
+        - REACT_APP_BACKEND_URL=http://backend-service:8080
     ports:
       - "3000:80"
     depends_on:
       - backend-service
     environment:
       - REACT_APP_BACKEND_URL=http://backend-service:8080
-    networks:
-      - app-network
-    container_name: backend-service
+    # networks:
+    #   - app-network
+    # container_name: backend-service
 
   backend-service:
     build: ./backend
@@ -21,8 +21,8 @@ services:
       - "8080:8080"
     depends_on:
       - db-service
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
 
   db-service:
     image: mongo:latest
@@ -30,9 +30,9 @@ services:
       - "27017:27017"
     volumes:
       - ./data:/data/db
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
 
-networks:
-  app-network:
-    driver: bridge
+# networks:
+#   app-network:
+#     driver: bridge
