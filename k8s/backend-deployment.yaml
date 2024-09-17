@@ -14,22 +14,18 @@ spec:
     spec:
       containers:
       - name: backend
-        image: jacksonlobo/app-backend:1.0.0
+        image: backend-service:latest # Assuming backend-service image is pushed to your registry
         ports:
         - containerPort: 8080
-        env:
-        - name: SPRING_DATA_MONGODB_URI
-          value: mongodb://db:27017/todolist # MongoDB connection URL
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: backend-service
 spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
   selector:
     app: backend
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
   type: ClusterIP

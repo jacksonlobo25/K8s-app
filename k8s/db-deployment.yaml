@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: db
+  name: mongodb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: db
+      app: mongodb
   template:
     metadata:
       labels:
-        app: db
+        app: mongodb
     spec:
       containers:
-      - name: db
+      - name: mongodb
         image: mongo:latest
         ports:
         - containerPort: 27017
@@ -22,17 +22,17 @@ spec:
           mountPath: /data/db
       volumes:
       - name: mongo-data
-        emptyDir: {} # For persistent storage, use PersistentVolumeClaim
+        hostPath:
+          path: /data/db # Ensure the path exists on your node
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: db-service
+  name: mongodb
 spec:
-  selector:
-    app: db
   ports:
-    - protocol: TCP
-      port: 27017
-      targetPort: 27017
-  type: ClusterIP
+    - port: 27017
+  selector:
+    app: mongodb
+  clusterIP: None # Headless service for internal communication

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
+  name: frontend
 spec:
   replicas: 1
   selector:
@@ -14,28 +14,21 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: jacksonlobo/app-frontend:3.0.0
+        image: frontend-service:latest # Assuming frontend-service image is pushed to your registry
         ports:
-        - containerPort: 3000
+        - containerPort: 80
         env:
         - name: REACT_APP_BACKEND_URL
-          valueFrom:
-            configMapKeyRef:
-              name: frontend-config
-              key: REACT_APP_BACKEND_URL
-
+          value: "http://backend-service:8080" # Point to the backend service
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend-service
 spec:
+  ports:
+    - port: 80
+      targetPort: 80
   selector:
     app: frontend
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 3000
-  type: NodePort
-
-
+  type: LoadBalancer
