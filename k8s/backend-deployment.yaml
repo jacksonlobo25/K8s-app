@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: backend-service:latest # Assuming backend-service image is pushed to your registry
+        image: jacksonlobo/app-backend
         ports:
         - containerPort: 8080
 ---

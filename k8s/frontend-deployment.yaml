@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: frontend-service:latest # Assuming frontend-service image is pushed to your registry
+        image: jacksonlobo/app-frontend
         ports:
         - containerPort: 80
         env:

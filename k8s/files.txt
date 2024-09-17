@@ -1,4 +1,4 @@
+kubectl apply -f db-deployment.yaml
 kubectl apply -f backend-deployment.yaml
 kubectl apply -f frontend-deployment.yaml
-kubectl apply -f db-deployment.yaml
 kubectl apply -f ingress.yaml # Only if you have ingress controller set up
