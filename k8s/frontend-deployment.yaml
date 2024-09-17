@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: frontend-deployment
 spec:
   replicas: 1
   selector:
@@ -19,7 +19,11 @@ spec:
         - containerPort: 3000
         env:
         - name: REACT_APP_BACKEND_URL
-          value: http://backend-service:8080 # Backend service URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: REACT_APP_BACKEND_URL
+
 ---
 apiVersion: v1
 kind: Service
@@ -33,3 +37,5 @@ spec:
       port: 80
       targetPort: 3000
   type: NodePort
+
+

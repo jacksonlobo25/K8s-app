@@ -8,7 +8,7 @@ function App() {
   const backendUrl = process.env.REACT_APP_BACKEND_URL; // Accessing environment variable
 
   useEffect(() => {
-    fetch(`${backendUrl}/tasks`)
+    fetch(`${backendUrl}/api/tasks`)
       .then(response => response.json())
       .then(data => setTasks(data))
       .catch(error => console.error(error));
@@ -16,7 +16,7 @@ function App() {
   }, [backendUrl]);
 
   const addTask = () => {
-    fetch(`${backendUrl}/tasks`, {
+    fetch(`${backendUrl}/api/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
