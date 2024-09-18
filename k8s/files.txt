@@ -1,4 +1,19 @@
-kubectl apply -f db-deployment.yaml
-kubectl apply -f backend-deployment.yaml
-kubectl apply -f frontend-deployment.yaml
-kubectl apply -f ingress.yaml # Only if you have ingress controller set up
+kubectl apply -f namespace.yaml
+
+kubectl apply -f Logging/pv-fluentd.yaml
+kubectl apply -f Logging/pvc-fluentd.yaml
+kubectl apply -f Logging/fluentd-daemonset.yaml
+
+kubectl apply -f Database/mongo-pv.yaml
+kubectl apply -f Database/mongo-pvc.yaml
+
+kubectl apply -f ConfigMap/frontend-configMap.yaml
+kubectl apply -f ConfigMap/backend-configmap.yaml
+
+kubectl apply -f Secrets/mongodb-secret.yaml
+
+kubectl apply -f Deployment/db-deployment.yaml
+kubectl apply -f Deployment/backend-deployment.yaml
+kubectl apply -f Deployment/frontend-deployment.yaml
+
+kubectl apply -f ingress.yaml 

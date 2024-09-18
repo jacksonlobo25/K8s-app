@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongodb
+  namespace: sample-app
 spec:
   replicas: 1
   selector:
@@ -17,19 +18,31 @@ spec:
         image: mongo:latest
         ports:
         - containerPort: 27017
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-username
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-password
         volumeMounts:
         - name: mongo-data
           mountPath: /data/db
       volumes:
       - name: mongo-data
-        hostPath:
-          path: /data/db # Ensure the path exists on your node
+        persistentVolumeClaim:
+          claimName: mongo-pvc
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mongodb
+  namespace: sample-app
 spec:
   ports:
     - port: 27017

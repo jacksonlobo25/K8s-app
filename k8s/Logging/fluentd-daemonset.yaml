@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluentd-logs
+  namespace: sample-app
   labels:
     k8s-app: fluentd-logs
 spec:
@@ -15,7 +16,7 @@ spec:
     spec:
       containers:
       - name: fluentd
-        image: fluent/fluentd:v1.12.0-debian-1.0
+        image: fluent/fluentd:v1.17.1-debian-1.0
         env:
         - name: FLUENTD_ARGS
           value: "--no-supervisor -q"
