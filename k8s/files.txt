@@ -10,7 +10,7 @@ kubectl apply -f Database/mongo-pvc.yaml
 kubectl apply -f ConfigMap/frontend-configMap.yaml
 kubectl apply -f ConfigMap/backend-configMap.yaml
 
-kubectl apply -f Secrets/mongodb-secret.yaml
+kubectl apply -f Secrets/mongo-secret.yaml
 
 kubectl apply -f Deployment/db-deployment.yaml
 kubectl apply -f Deployment/backend-deployment.yaml
