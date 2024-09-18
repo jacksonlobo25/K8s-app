@@ -10,4 +10,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /var/log/k8s-logs   # Path on the node where logs will be stored
+    path: /home/jackson/data/fluentd-logs

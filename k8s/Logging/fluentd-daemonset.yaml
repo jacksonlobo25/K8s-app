@@ -22,13 +22,13 @@ spec:
           value: "--no-supervisor -q"
         volumeMounts:
         - name: varlog
-          mountPath: /var/log/containers    # Path where logs are stored in Kubernetes
+          mountPath: /var/log/containers     # Path where logs are stored in Kubernetes
         - name: persistent-storage
-          mountPath: /fluentd/logs          # Persistent storage for logs
+          mountPath: /fluentd/logs           # Persistent storage for logs
       volumes:
       - name: varlog
         hostPath:
-          path: /var/log/containers          # Host path where Kubernetes stores logs
+          path: /var/log/containers           # Host path where Kubernetes stores logs
       - name: persistent-storage
         persistentVolumeClaim:
-          claimName: log-pvc
+          claimName: log-pvc  
