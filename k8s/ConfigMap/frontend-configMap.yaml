@@ -4,5 +4,5 @@ metadata:
   name: frontend-config
   namespace: sample-app
 data:
-  REACT_APP_BACKEND_URL: "http://backend-service:8080" 
-  # REACT_APP_BACKEND_URL: "http://34.170.70.112:8080" 
+  # REACT_APP_BACKEND_URL: "http://backend-service:8080" 
+  REACT_APP_BACKEND_URL: "http://34.172.103.184:8080" 

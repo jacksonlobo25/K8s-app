@@ -5,10 +5,10 @@ metadata:
   namespace: sample-app
 spec:
   capacity:
-    storage: 5Gi # Define the storage size
+    storage: 5Gi 
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: manual
   hostPath:
-    path: /data/mongo-pv # This path should exist on the node
+    path: /data/mongo-pv 

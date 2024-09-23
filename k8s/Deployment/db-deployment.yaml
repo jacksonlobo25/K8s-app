@@ -48,4 +48,4 @@ spec:
     - port: 27017
   selector:
     app: mongodb
-  clusterIP: None # Headless service for internal communication
+  clusterIP: None 
