@@ -5,7 +5,9 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL; // Accessing environment variable
+  // const backendUrl = "http://backend-service:8080";
+
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     fetch(`${backendUrl}/api/tasks`)

@@ -1,27 +1,40 @@
 version: '3'
 services:
+  # Frontend service
   frontend-service:
     build:
-      context: ./frontend
-      args:
-        - REACT_APP_BACKEND_URL=http://backend-service:8080
+      context: ./frontend    # Assuming your frontend Dockerfile is in ./frontend directory
     ports:
-      - "3000:80"
+      - "3000:80"            # Exposing port 3000 to access the frontend
     depends_on:
-      - backend-service
+      - backend-service      # Ensure backend starts before frontend
     environment:
-      - REACT_APP_BACKEND_URL=http://backend-service:8080
+      - REACT_APP_BACKEND_URL=http://backend-service:8080 # React app will use this backend URL
 
+  # Backend service
   backend-service:
-    build: ./backend
+    build:
+      context: ./backend     # Assuming your backend Dockerfile is in ./backend directory
     ports:
-      - "8080:8080"
+      - "8080:8080"          # Exposing backend on port 8080
     depends_on:
-      - db-service
+      - db-service           # Ensure the database starts before the backend
+    environment:
+      - MONGO_URL=mongodb://db-service:27017/mydb  # Backend connects to the MongoDB service
+    networks:
+      - app-network          # Attach backend to the same network as frontend and database
 
+  # MongoDB service
   db-service:
-    image: mongo:latest
+    image: mongo:latest      # Use latest MongoDB image
     ports:
-      - "27017:27017"
+      - "27017:27017"        # Exposing MongoDB on default port
     volumes:
-      - ./data:/data/db
+      - ./data:/data/db      # Persist MongoDB data
+    networks:
+      - app-network          # Attach to the same network as backend and frontend
+
+# Define a custom network so all services can communicate
+networks:
+  app-network:
+    driver: bridge           # Use a bridge network for internal communication
